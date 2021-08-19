@@ -5,7 +5,6 @@
 # All Rights Reserved.
 
 import sys
-import json
 
 from typing import List
 
@@ -14,7 +13,7 @@ from alibabacloud_tea_openapi import models as open_api_models
 from alibabacloud_vod20170321 import models as vod_20170321_models
 
 
-class GetVideoList:
+class GetVideoIDList:
     def __init__(self):
         pass
 
@@ -46,16 +45,18 @@ class GetVideoList:
         access_key_secret: str,
         page_no: int,
         page_size: int,
-    ) -> List[str]:
-        client = GetVideoList.create_client(access_key_id, access_key_secret)
+    ) -> list[str]:
+        video_id_list = []
+        client = GetVideoIDList.create_client(access_key_id, access_key_secret)
         get_video_list_request = vod_20170321_models.GetVideoListRequest(
             page_no = page_no,
             page_size = page_size
         )
-        # 复制代码运行请自行打印 API 的返回值
-        response = client.get_video_list(get_video_list_request)
-        print(response)
-
+        video_infos = client.get_video_list(get_video_list_request).body.video_list.video
+        for video in video_infos:
+            video_id_list.append(video.video_id)
+        # print(video_id_list)
+        return video_id_list
 
     @staticmethod
     async def main_async(
@@ -63,14 +64,15 @@ class GetVideoList:
         access_key_secret: str,
         page_no: int,
         page_size: int,
-    ) -> List[str]:
-        client = GetVideoList.create_client(access_key_id, access_key_secret)
+    ) -> list[str]:
+        video_id_list = []
+        client = GetVideoIDList.create_client(access_key_id, access_key_secret)
         get_video_list_request = vod_20170321_models.GetVideoListRequest(
             page_no = page_no,
             page_size = page_size
         )
-        # 复制代码运行请自行打印 API 的返回值
-        response = client.get_video_list_async(get_video_list_request)
-
-if __name__ == '__main__':
-    GetVideoList.main('qJjlKgt1U4Qnm9u2', 'QVkQZLlajRe7ZjA44iAkVrcZ0LPWJj', 1, 100)
+        video_infos = await client.get_video_list_async(get_video_list_request).body.video_list.video
+        for video in video_infos:
+            video_id_list.append(video.video_id)
+        # print(video_id_list)
+        return video_id_list
