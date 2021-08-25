@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 # @ Tony Chang
-# Copyright (c) 1994-2021 Tony Chang aptx4869.tv
+# Copyright (c) 1994-2021 Tony Chang https://github.com/tony-aptx4869
 # All Rights Reserved.
 
 from typing import List
@@ -50,26 +50,29 @@ class DeleteAllVideos:
         return video_id_list
 
 if __name__ == '__main__':
-    video_id_list = DeleteAllVideos.get_all_video_ids('qJjlKgt1U4Qnm9u2', 'QVkQZLlajRe7ZjA44iAkVrcZ0LPWJj')
+    access_key_id = ''
+    access_key_secret = ''
+    video_id_list = DeleteAllVideos.get_all_video_ids(access_key_id, access_key_secret)
     # print(video_id_list)
     print(len(video_id_list))
     count_request = 0
     if len(video_id_list) > 0 :
         for video_id in video_id_list :
             video_id_str = ','.join(video_id)
-            DeleteVideo.main('qJjlKgt1U4Qnm9u2', 'QVkQZLlajRe7ZjA44iAkVrcZ0LPWJj', video_id_str)
+            DeleteVideo.main(access_key_id, access_key_secret, video_id_str)
             count_request += 1
     print(count_request)
 
-    # video_list = GetVideoIDList.main('qJjlKgt1U4Qnm9u2', 'QVkQZLlajRe7ZjA44iAkVrcZ0LPWJj', 0, 100)
+    # video_list = GetVideoIDList.main(access_key_id, access_key_secret, 0, 100)
     # print(video_list[80:100])
 
 
 
     # while True:
-    #     video_list = GetVideoIDList.main('qJjlKgt1U4Qnm9u2', 'QVkQZLlajRe7ZjA44iAkVrcZ0LPWJj', 1, 20)
+    #     video_list = GetVideoIDList.main(access_key_id, access_key_secret, 1, 20)
     #     if len(video_list) <= 0:
     #         break
     #     video_ids = ','.join(video_list)
-    #     DeleteVideo.main('qJjlKgt1U4Qnm9u2', 'QVkQZLlajRe7ZjA44iAkVrcZ0LPWJj', video_ids)
-
+    #     DeleteVideo.main(access_key_id, access_key_secret, video_ids)
+    # video_list = GetVideoIDList.main(access_key_id, access_key_secret, 1, 20)
+    # print(video_list)

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 # @ Tony Chang
-# Copyright (c) 1994-2021 Tony Chang aptx4869.tv
+# Copyright (c) 1994-2021 Tony Chang https://github.com/tony-aptx4869
 # All Rights Reserved.
 
 import sys
@@ -36,7 +36,7 @@ class DeleteVideo:
             access_key_secret=access_key_secret
         )
         # 访问的域名
-        config.endpoint = 'vod.cn-shanghai.aliyuncs.com'
+        config.endpoint = 'vod.cn-beijing.aliyuncs.com'
         return vod20170321Client(config)
 
     @staticmethod
